@@ -1,0 +1,6 @@
+# Original design handoff (extracted into source/)
+*.zip
+design_handoff_linux_workshop_deck/
+
+# Font download cache used by scripts/build-deck.py
+scripts/.fontcache/

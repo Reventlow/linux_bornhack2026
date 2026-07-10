@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #f4f1e8; }
+  a { color: #DE6A41; } a:hover { color: #F05A0F; }
+  :root {
+    --type-title: 64px; --type-subtitle: 40px; --type-body: 30px; --type-small: 24px; --type-code: 26px;
+    --pad-top: 90px; --pad-x: 110px; --gap-title: 44px; --gap-item: 26px;
+    --bg: #f4f1e8; --panel: #faf8f0; --panel2: #eae6d9; --line: #c5c2b0;
+    --ink: #3a4433; --soft: #46503f; --dim: #818678; --faint: #979b8e;
+    --green: #6b8054; --amber: #DE6A41;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --sans: 'IBM Plex Sans', system-ui, sans-serif;
+  }
+  @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+</style>
+</helmet>
+<x-import component-from-global-scope="deck-stage" from="./deck-stage.js" width="1920" height="1080" hint-size="100%,100%">
+
+  <!-- ══════════ 1 · TITLE ══════════ -->
+  <section data-label="Title" data-screen-label="Title" style="background-color: var(--bg); background-image: linear-gradient(rgba(122,148,97,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(122,148,97,0.14) 1px, transparent 1px); background-size: 96px 96px; color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; padding: var(--pad-top) var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="font: 500 26px var(--mono); color: var(--green); letter-spacing: 0.1em;">bornhack 2026 · workshop · for absolute newcomers</div>
+    <div style="margin-top: 120px;">
+      <h1 style="margin: 0; font: 800 118px/1.08 var(--mono); letter-spacing: -0.02em; color: var(--ink);">Linux for<br>the Curious<span style="display: inline-block; width: 30px; height: 86px; background: var(--ink); margin-left: 22px; animation: blink 1.1s steps(1) infinite;"></span></h1>
+      <p style="margin: 44px 0 0; font: 400 36px/1.5 var(--sans); color: var(--soft); max-width: 1100px;">What Linux actually is, how to pick a distro, and a first real tour of the terminal — a hands-on two hours.</p>
+    </div>
+    <div style="margin-top: auto; max-width: 760px;">
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;">
+        <div style="display: flex; align-items: center; gap: 9px; padding: 12px 20px; background: var(--panel2); border-bottom: 1px solid var(--line);">
+          <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+          <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+          <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+          <span style="margin-left: 10px; font: 500 24px var(--mono); color: var(--dim);">you@bornhack:~</span>
+        </div>
+        <pre style="margin: 0; padding: 24px 28px; font: 500 26px/1.8 var(--mono); color: var(--ink); white-space: pre-wrap;"><span style="color: var(--green);">$</span> whoami
+<span style="color: var(--dim);">gorm reventlow</span></pre>
+      </div>
+    </div>
+    <div style="margin-top: 36px; display: flex; justify-content: space-between; font: 500 24px var(--mono); color: var(--faint);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+  <!-- ══════════ 2 · FORMAT ══════════ -->
+  <section data-label="Format" data-screen-label="How the next two hours work" style="background-color: var(--bg); background-image: linear-gradient(rgba(122,148,97,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(122,148,97,0.14) 1px, transparent 1px); background-size: 96px 96px; color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; padding: var(--pad-top) var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="font: 500 24px var(--mono); color: var(--green); letter-spacing: 0.1em;">## format</div>
+    <h1 style="margin: 20px 0 0; font: 800 var(--type-title)/1.12 var(--mono); letter-spacing: -0.01em; color: var(--ink);">How the Next Two Hours Work</h1>
+    <div style="margin-top: 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 40px 36px;">
+        <div style="display: flex; align-items: baseline; gap: 20px;">
+          <span style="font: 700 34px var(--mono); color: var(--green);">part 1</span>
+          <span style="font: 500 24px var(--mono); color: var(--dim);">~50 min · theory</span>
+        </div>
+        <p style="margin: 22px 0 0; font: 400 29px/1.55 var(--sans); color: var(--soft);">What Linux is, the kernel, distros and their families, release models, package managers, desktops — and how to pick your first one.</p>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 40px 36px;">
+        <div style="display: flex; align-items: baseline; gap: 20px;">
+          <span style="font: 700 34px var(--mono); color: var(--green);">part 2</span>
+          <span style="font: 500 24px var(--mono); color: var(--dim);">~60 min · hands-on</span>
+        </div>
+        <p style="margin: 22px 0 0; font: 400 29px/1.55 var(--sans); color: var(--soft);">Nine small tasks in the terminal: navigate, make and edit files, move and delete them, then the power tools — <span style="font: 500 26px var(--mono); color: var(--ink);">man</span>, <span style="font: 500 26px var(--mono); color: var(--ink);">tldr</span>, <span style="font: 500 26px var(--mono); color: var(--ink);">btop</span>.</p>
+      </div>
+    </div>
+    <div style="margin-top: 48px; display: flex; align-items: center; gap: 22px;">
+      <span style="font: 700 26px var(--mono); color: #3a4433; background: var(--amber); padding: 8px 18px; border-radius: 6px; letter-spacing: 0.06em;">TASK</span>
+      <span style="font: 400 29px var(--sans); color: var(--soft);">When a slide has this amber badge, it's hands-on-keyboard time. Finished early? Help a neighbor.</span>
+    </div>
+    <div style="margin-top: 32px; font: 500 26px/1.7 var(--mono); color: var(--dim);"># prerequisites: curiosity (required) · a laptop (recommended) · questions welcome at any time</div>
+    <div style="margin-top: auto; display: flex; justify-content: space-between; font: 500 24px var(--mono); color: var(--faint);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+  <!-- ══════════ 3 · DIVIDER PART 1 ══════════ -->
+  <section data-label="Part 1" data-screen-label="Part 1 what is Linux" style="background: var(--green); color: #f4f1e8; font-family: var(--sans); display: flex; flex-direction: column; padding: var(--pad-top) var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="display: flex; flex-direction: column; justify-content: center; flex: 1;">
+      <div style="font: 500 34px var(--mono); color: rgba(244,241,232,0.75);">you@bornhack:~$ cd part-1/</div>
+      <h1 style="margin: 32px 0 0; font: 800 120px/1.04 var(--mono); letter-spacing: -0.02em; color: #f4f1e8;">Part 1</h1>
+      <div style="margin-top: 12px; font: 500 56px var(--mono); color: #f4f1e8;">What is Linux?</div>
+    </div>
+    <div style="display: flex; justify-content: space-between; font: 500 24px var(--mono); color: rgba(244,241,232,0.7);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+  <!-- ══════════ 4 · WHAT IS LINUX ══════════ -->
+  <section data-label="What Is Linux" data-screen-label="What is Linux" style="background-color: var(--bg); background-image: linear-gradient(rgba(122,148,97,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(122,148,97,0.14) 1px, transparent 1px); background-size: 96px 96px; color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; padding: var(--pad-top) var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="font: 500 24px var(--mono); color: var(--green); letter-spacing: 0.1em;">## concepts</div>
+    <h1 style="margin: 20px 0 0; font: 800 var(--type-title)/1.12 var(--mono); letter-spacing: -0.01em; color: var(--ink);">What Is Linux?</h1>
+    <div style="margin-top: 56px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: 36px;">
+        <p style="margin: 0; font: 400 36px/1.5 var(--sans); color: var(--ink);">A free, open-source operating system built on the Unix tradition.</p>
+        <div style="display: flex; gap: 24px;">
+          <span style="font: 700 30px var(--mono); color: var(--green);">&gt;</span>
+          <p style="margin: 0; font: 400 30px/1.55 var(--sans); color: var(--soft);">At its core sits the <strong style="color: var(--ink);">kernel</strong> — the part that talks to your hardware.</p>
+        </div>
+        <div style="display: flex; gap: 24px;">
+          <span style="font: 700 30px var(--mono); color: var(--green);">&gt;</span>
+          <p style="margin: 0; font: 400 30px/1.55 var(--sans); color: var(--soft);">Licensed under the <strong style="color: var(--ink);">GPL</strong>: anyone may read, change and share the code.</p>
+        </div>
+        <div style="display: flex; gap: 24px;">
+          <span style="font: 700 30px var(--mono); color: var(--green);">&gt;</span>
+          <p style="margin: 0; font: 400 30px/1.55 var(--sans); color: var(--soft);">Built by <strong style="color: var(--ink);">thousands of volunteers</strong> — no single company owns it.</p>
+        </div>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 40px 44px;">
+        <div style="font: 700 27px var(--mono); color: var(--green); letter-spacing: 0.04em;">already running on</div>
+        <div style="margin-top: 26px; display: flex; flex-direction: column; gap: 18px; font: 400 29px/1.4 var(--sans); color: var(--soft);">
+          <div>Most of the web's servers</div>
+          <div>All 500 fastest supercomputers</div>
+          <div>Every Android phone</div>
+          <div>Routers, TVs, cars, ATMs</div>
+          <div>A helicopter on Mars</div>
+          <div style="color: var(--dim);">…and the BornHack network</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: auto; display: flex; justify-content: space-between; font: 500 24px var(--mono); color: var(--faint);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+  <!-- ══════════ 5 · HISTORY ══════════ -->
+  <section data-label="History" data-screen-label="A short history" style="background-color: var(--bg); background-image: linear-gradient(rgba(122,148,97,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(122,148,97,0.14) 1px, transparent 1px); background-size: 96px 96px; color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; padding: var(--pad-top) var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="font: 500 24px var(--mono); color: var(--green); letter-spacing: 0.1em;">## concepts</div>
+    <h1 style="margin: 20px 0 0; font: 800 var(--type-title)/1.12 var(--mono); letter-spacing: -0.01em; color: var(--ink);">A Short History</h1>
+    <div style="display: flex; flex-direction: column; margin-top: 52px;">
+      <div style="display: grid; grid-template-columns: 200px 40px 1fr; align-items: start; gap: 24px; padding: 22px 0;">
+        <div style="font: 700 40px var(--mono); color: var(--green);">1969</div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; padding-top: 14px;"><div style="width: 14px; height: 14px; border-radius: 50%; background: var(--green);"></div><div style="width: 2px; flex: 1; min-height: 40px; background: var(--line);"></div></div>
+        <div style="font: 400 31px/1.4 var(--sans); color: var(--ink); padding-top: 6px;">Unix is born at Bell Labs — <span style="color: var(--dim);">the grandfather of nearly every serious OS.</span></div>
+      </div>
+      <div style="display: grid; grid-template-columns: 200px 40px 1fr; align-items: start; gap: 24px; padding: 22px 0;">
+        <div style="font: 700 40px var(--mono); color: var(--green);">1983</div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; padding-top: 14px;"><div style="width: 14px; height: 14px; border-radius: 50%; background: var(--green);"></div><div style="width: 2px; flex: 1; min-height: 40px; background: var(--line);"></div></div>
+        <div style="font: 400 31px/1.4 var(--sans); color: var(--ink); padding-top: 6px;">The GNU project starts building a free Unix — <span style="color: var(--dim);">tools, compilers… but no kernel yet.</span></div>
+      </div>
+      <div style="display: grid; grid-template-columns: 200px 40px 1fr; align-items: start; gap: 24px; padding: 22px 0;">
+        <div style="font: 700 40px var(--mono); color: var(--green);">1991</div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; padding-top: 14px;"><div style="width: 14px; height: 14px; border-radius: 50%; background: var(--green);"></div><div style="width: 2px; flex: 1; min-height: 40px; background: var(--line);"></div></div>
+        <div style="font: 400 31px/1.4 var(--sans); color: var(--ink); padding-top: 6px;">Linus Torvalds, a student in Helsinki, posts his hobby kernel online — <span style="color: var(--dim);">"just a hobby, won't be big and professional like gnu."</span></div>
+      </div>
+      <div style="display: grid; grid-template-columns: 200px 40px 1fr; align-items: start; gap: 24px; padding: 22px 0;">
+        <div style="font: 700 40px var(--mono); color: var(--amber);">today</div>
+        <div style="display: flex; flex-direction: column; align-items: center; padding-top: 14px;"><div style="width: 14px; height: 14px; border-radius: 50%; background: var(--amber);"></div></div>
+        <div style="font: 400 31px/1.4 var(--sans); color: var(--ink); padding-top: 6px;">The largest collaborative software project on Earth — <span style="color: var(--dim);">thousands of contributors, every industry.</span></div>
+      </div>
+    </div>
+    <div style="margin-top: auto; display: flex; justify-content: space-between; font: 500 24px var(--mono); color: var(--faint);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+  <!-- ══════════ 6 · KERNEL ══════════ -->
+  <section data-label="Kernel" data-screen-label="The kernel" style="background-color: var(--bg); background-image: linear-gradient(rgba(122,148,97,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(122,148,97,0.14) 1px, transparent 1px); background-size: 96px 96px; color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; padding: var(--pad-top) var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="font: 500 24px var(--mono); color: var(--green); letter-spacing: 0.1em;">## concepts</div>
+    <h1 style="margin: 20px 0 0; font: 800 var(--type-title)/1.12 var(--mono); letter-spacing: -0.01em; color: var(--ink);">The Kernel</h1>
+    <div style="margin-top: 48px; display: grid; grid-template-columns: 1fr 1.1fr; gap: 72px; align-items: center;">
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div style="border: 1px solid var(--line); background: var(--panel); border-radius: 10px; padding: 20px 28px; display: flex; justify-content: space-between; align-items: center;">
+          <span style="font: 500 27px var(--mono); color: var(--soft);">you</span>
+          <span style="font: 400 24px var(--mono); color: var(--dim);">typing, clicking</span>
+        </div>
+        <div style="text-align: center; font: 500 24px var(--mono); color: var(--dim);">↓</div>
+        <div style="border: 1px solid var(--line); background: var(--panel); border-radius: 10px; padding: 20px 28px; display: flex; justify-content: space-between; align-items: center;">
+          <span style="font: 500 27px var(--mono); color: var(--soft);">apps &amp; shell</span>
+          <span style="font: 400 24px var(--mono); color: var(--dim);">firefox, bash…</span>
+        </div>
+        <div style="text-align: center; font: 500 24px var(--mono); color: var(--dim);">↓</div>
+        <div style="border: 1px solid var(--line); background: var(--panel); border-radius: 10px; padding: 20px 28px; display: flex; justify-content: space-between; align-items: center;">
+          <span style="font: 500 27px var(--mono); color: var(--soft);">distro</span>
+          <span style="font: 400 24px var(--mono); color: var(--dim);">ubuntu, fedora, arch…</span>
+        </div>
+        <div style="text-align: center; font: 500 24px var(--mono); color: var(--dim);">↓</div>
+        <div style="border: 1px solid var(--green); background: rgba(107,128,84,0.16); border-radius: 10px; padding: 20px 28px; display: flex; justify-content: space-between; align-items: center;">
+          <span style="font: 700 27px var(--mono); color: var(--green);">kernel</span>
+          <span style="font: 500 24px var(--mono); color: var(--green);">the boss</span>
+        </div>
+        <div style="text-align: center; font: 500 24px var(--mono); color: var(--dim);">↓</div>
+        <div style="border: 1px solid var(--line); background: var(--panel2); border-radius: 10px; padding: 20px 28px; display: flex; justify-content: space-between; align-items: center;">
+          <span style="font: 500 27px var(--mono); color: var(--dim);">hardware</span>
+          <span style="font: 400 24px var(--mono); color: var(--dim);">cpu, ram, disk, wifi</span>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 28px;">
+        <p style="margin: 0; font: 400 32px/1.5 var(--sans); color: var(--ink);">The kernel is the middleman between your programs and your machine. It handles:</p>
+        <div style="display: flex; flex-direction: column; gap: 16px; font: 400 29px/1.45 var(--sans); color: var(--soft);">
+          <div><strong style="color: var(--ink);">Processes</strong> — starting, scheduling, stopping programs</div>
+          <div><strong style="color: var(--ink);">Memory</strong> — who gets RAM, and how much</div>
+          <div><strong style="color: var(--ink);">Drivers</strong> — speaking every device's language</div>
+          <div><strong style="color: var(--ink);">Filesystems &amp; network</strong> — storing bytes, moving packets</div>
+          <div><strong style="color: var(--ink);">Security</strong> — users, permissions, isolation</div>
+        </div>
+        <div style="font: 500 25px/1.7 var(--mono); color: var(--dim);"># strictly speaking, "Linux" is only the green box</div>
+      </div>
+    </div>
+    <div style="margin-top: auto; display: flex; justify-content: space-between; font: 500 24px var(--mono); color: var(--faint);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+  <!-- ══════════ 7 · WHAT'S A DISTRO ══════════ -->
+  <section data-label="Distro" data-screen-label="What is a distro" style="background-color: var(--bg); background-image: linear-gradient(rgba(122,148,97,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(122,148,97,0.14) 1px, transparent 1px); background-size: 96px 96px; color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; padding: var(--pad-top) var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="font: 500 24px var(--mono); color: var(--green); letter-spacing: 0.1em;">## concepts</div>
+    <h1 style="margin: 20px 0 0; font: 800 var(--type-title)/1.12 var(--mono); letter-spacing: -0.01em; color: var(--ink);">What's a Distro?</h1>
+    <p style="margin: 40px 0 0; font: 400 36px/1.5 var(--sans); color: var(--soft); max-width: 1400px;">Nobody runs "just Linux". You run a <strong style="color: var(--ink);">distribution</strong> — the kernel bundled with everything that makes it a usable OS.</p>
+    <div style="margin-top: 64px; display: flex; align-items: stretch; gap: 18px;">
+      <div style="flex: 1; border: 1px solid var(--green); background: rgba(107,128,84,0.12); border-radius: 12px; padding: 30px 26px; display: flex; flex-direction: column; gap: 8px; justify-content: center;">
+        <div style="font: 700 29px var(--mono); color: var(--green);">kernel</div>
+        <div style="font: 400 25px var(--sans); color: var(--soft);">the engine</div>
+      </div>
+      <div style="display: flex; align-items: center; font: 500 40px var(--mono); color: var(--dim);">+</div>
+      <div style="flex: 1; border: 1px solid var(--line); background: var(--panel); border-radius: 12px; padding: 30px 26px; display: flex; flex-direction: column; gap: 8px; justify-content: center;">
+        <div style="font: 700 29px var(--mono); color: var(--ink);">package manager</div>
+        <div style="font: 400 25px var(--sans); color: var(--dim);">installs software</div>
+      </div>
+      <div style="display: flex; align-items: center; font: 500 40px var(--mono); color: var(--dim);">+</div>
+      <div style="flex: 1; border: 1px solid var(--line); background: var(--panel); border-radius: 12px; padding: 30px 26px; display: flex; flex-direction: column; gap: 8px; justify-content: center;">
+        <div style="font: 700 29px var(--mono); color: var(--ink);">software &amp; tools</div>
+        <div style="font: 400 25px var(--sans); color: var(--dim);">apps, libraries</div>
+      </div>
+      <div style="display: flex; align-items: center; font: 500 40px var(--mono); color: var(--dim);">+</div>
+      <div style="flex: 1; border: 1px solid var(--line); background: var(--panel); border-radius: 12px; padding: 30px 26px; display: flex; flex-direction: column; gap: 8px; justify-content: center;">
+        <div style="font: 700 29px var(--mono); color: var(--ink);">desktop</div>
+        <div style="font: 400 25px var(--sans); color: var(--dim);">optional, for servers</div>
+      </div>
+      <div style="display: flex; align-items: center; font: 500 40px var(--mono); color: var(--green);">=</div>
+      <div style="flex: 1.1; background: var(--green); border-radius: 12px; padding: 30px 26px; display: flex; flex-direction: column; gap: 8px; justify-content: center;">
+        <div style="font: 700 29px var(--mono); color: #f4f1e8;">a distro</div>
+        <div style="font: 400 25px var(--sans); color: rgba(244,241,232,0.8);">Ubuntu, Fedora, Arch…</div>
+      </div>
+    </div>
+    <div style="margin-top: 56px; font: 500 26px/1.7 var(--mono); color: var(--dim);"># same engine, different car. hundreds exist — most share a few big ancestors.</div>
+    <div style="margin-top: auto; display: flex; justify-content: space-between; font: 500 24px var(--mono); color: var(--faint);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+  <!-- ══════════ 8 · DISTRO TOUR ══════════ -->
+  <section data-label="Distro Tour" data-screen-label="A tour of distros" style="background-color: var(--bg); background-image: linear-gradient(rgba(122,148,97,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(122,148,97,0.14) 1px, transparent 1px); background-size: 96px 96px; color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; padding: var(--pad-top) var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="font: 500 24px var(--mono); color: var(--green); letter-spacing: 0.1em;">## concepts</div>
+    <h1 style="margin: 20px 0 0; font: 800 var(--type-title)/1.12 var(--mono); letter-spacing: -0.01em; color: var(--ink);">A Tour of Distros</h1>
+    <div style="margin-top: 56px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;">
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 32px 34px;">
+        <div style="font: 700 30px var(--mono); color: var(--green);">Ubuntu</div>
+        <p style="margin: 14px 0 0; font: 400 27px/1.4 var(--sans); color: var(--soft);">The friendly default. Huge community, everything just works.</p>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 32px 34px;">
+        <div style="font: 700 30px var(--mono); color: var(--green);">Debian</div>
+        <p style="margin: 14px 0 0; font: 400 27px/1.4 var(--sans); color: var(--soft);">The rock. Stable, no-nonsense — runs half the internet's servers.</p>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 32px 34px;">
+        <div style="font: 700 30px var(--mono); color: var(--green);">Fedora</div>
+        <p style="margin: 14px 0 0; font: 400 27px/1.4 var(--sans); color: var(--soft);">The fresh one. Newest tech first, polished desktop.</p>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 32px 34px;">
+        <div style="font: 700 30px var(--mono); color: var(--green);">Mint</div>
+        <p style="margin: 14px 0 0; font: 400 27px/1.4 var(--sans); color: var(--soft);">The familiar one. Feels like classic Windows — gentle landing.</p>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 32px 34px;">
+        <div style="font: 700 30px var(--mono); color: var(--ink);">Arch</div>
+        <p style="margin: 14px 0 0; font: 400 27px/1.4 var(--sans); color: var(--soft);">The DIY kit. You build it piece by piece. (Users will tell you. btw.)</p>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 32px 34px;">
+        <div style="font: 700 30px var(--mono); color: var(--ink);">Kali</div>
+        <p style="margin: 14px 0 0; font: 400 27px/1.4 var(--sans); color: var(--soft);">The locksmith. Security testing toolkit — popular at this camp.</p>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 32px 34px;">
+        <div style="font: 700 30px var(--mono); color: var(--ink);">Raspberry Pi OS</div>
+        <p style="margin: 14px 0 0; font: 400 27px/1.4 var(--sans); color: var(--soft);">Debian tuned for the little boards in every hardware project.</p>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 32px 34px;">
+        <div style="font: 700 30px var(--mono); color: var(--ink);">SteamOS</div>
+        <p style="margin: 14px 0 0; font: 400 27px/1.4 var(--sans); color: var(--soft);">Arch tuned for gaming — it's what runs the Steam Deck.</p>
+      </div>
+    </div>
+    <div style="margin-top: 48px; font: 500 26px/1.7 var(--mono); color: var(--dim);"># several hundred more exist. these eight cover most conversations.</div>
+    <div style="margin-top: auto; display: flex; justify-content: space-between; font: 500 24px var(--mono); color: var(--faint);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+  <!-- ══════════ 8b · COMMERCIAL VS COMMUNITY ══════════ -->
+  <section data-label="Commercial vs Community" data-screen-label="Commercial vs community distros" style="background-color: var(--bg); background-image: linear-gradient(rgba(122,148,97,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(122,148,97,0.14) 1px, transparent 1px); background-size: 96px 96px; color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; padding: var(--pad-top) var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="font: 500 24px var(--mono); color: var(--green); letter-spacing: 0.1em;">## concepts</div>
+    <h1 style="margin: 20px 0 0; font: 800 var(--type-title)/1.12 var(--mono); letter-spacing: -0.01em; color: var(--ink);">Commercial vs. Community Distros</h1>
+    <div style="margin-top: 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 40px 44px;">
+        <div style="font: 700 32px var(--mono); color: var(--green);">commercial — run by a company</div>
+        <div style="margin-top: 26px; display: grid; grid-template-columns: auto 1fr; gap: 16px 26px; font: 400 28px/1.5 var(--sans); color: var(--soft); align-items: baseline;">
+          <span style="font: 500 24px var(--mono); color: var(--dim);">money</span><span>paid support contracts, certifications, training</span>
+          <span style="font: 500 24px var(--mono); color: var(--dim);">support</span><span>professional, guaranteed — with an SLA and a phone number</span>
+          <span style="font: 500 24px var(--mono); color: var(--dim);">pick when</span><span>a business needs someone to call at 3 AM</span>
+        </div>
+        <div style="margin-top: 30px; font: 500 25px var(--mono); color: var(--dim);">RHEL · SUSE SLES · Ubuntu (Canonical)</div>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 40px 44px;">
+        <div style="font: 700 32px var(--mono); color: var(--green);">community — run by volunteers</div>
+        <div style="margin-top: 26px; display: grid; grid-template-columns: auto 1fr; gap: 16px 26px; font: 400 28px/1.5 var(--sans); color: var(--soft); align-items: baseline;">
+          <span style="font: 500 24px var(--mono); color: var(--dim);">money</span><span>donations and sponsors — no profit motive</span>
+          <span style="font: 500 24px var(--mono); color: var(--dim);">support</span><span>forums, wikis, chat — often excellent, never guaranteed</span>
+          <span style="font: 500 24px var(--mono); color: var(--dim);">pick when</span><span>you're a human with curiosity — like this room</span>
+        </div>
+        <div style="margin-top: 30px; font: 500 25px var(--mono); color: var(--dim);">Debian · Arch · Fedora (Red Hat–sponsored)</div>
+      </div>
+    </div>
+    <div style="margin-top: 52px; font: 500 26px/1.7 var(--mono); color: var(--dim);"># the line blurs: Ubuntu has a company and a community. Fedora is community-run, corporate-sponsored — and open decision-making is the norm in both worlds.</div>
+    <div style="margin-top: auto; display: flex; justify-content: space-between; font: 500 24px var(--mono); color: var(--faint);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+  <!-- ══════════ 9 · RELEASE MODELS ══════════ -->
+  <section data-label="Release Models" data-screen-label="Release models" style="background-color: var(--bg); background-image: linear-gradient(rgba(122,148,97,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(122,148,97,0.14) 1px, transparent 1px); background-size: 96px 96px; color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; padding: var(--pad-top) var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="font: 500 24px var(--mono); color: var(--green); letter-spacing: 0.1em;">## concepts</div>
+    <h1 style="margin: 20px 0 0; font: 800 var(--type-title)/1.12 var(--mono); letter-spacing: -0.01em; color: var(--ink);">Release Models</h1>
+    <p style="margin: 36px 0 0; font: 400 34px/1.5 var(--sans); color: var(--soft);">How often does your distro change under you?</p>
+    <div style="margin-top: 48px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;">
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 40px 38px; display: flex; flex-direction: column; gap: 18px;">
+        <div style="font: 700 31px var(--mono); color: var(--green);">fixed release</div>
+        <p style="margin: 0; font: 400 29px/1.5 var(--sans); color: var(--ink);">A new version every 6–12 months. Predictable upgrades.</p>
+        <p style="margin: 0; font: 400 27px/1.5 var(--sans); color: var(--dim);">Software can feel dated near the end of a cycle.</p>
+        <div style="margin-top: auto; font: 500 25px var(--mono); color: var(--dim);">ubuntu · fedora</div>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 40px 38px; display: flex; flex-direction: column; gap: 18px;">
+        <div style="font: 700 31px var(--mono); color: var(--green);">rolling release</div>
+        <p style="margin: 0; font: 400 29px/1.5 var(--sans); color: var(--ink);">No versions — updates flow in continuously, forever.</p>
+        <p style="margin: 0; font: 400 27px/1.5 var(--sans); color: var(--dim);">Always the latest. Occasionally the latest bug, too.</p>
+        <div style="margin-top: auto; font: 500 25px var(--mono); color: var(--dim);">arch · openSUSE tumbleweed</div>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 40px 38px; display: flex; flex-direction: column; gap: 18px;">
+        <div style="font: 700 31px var(--mono); color: var(--green);">LTS</div>
+        <p style="margin: 0; font: 400 29px/1.5 var(--sans); color: var(--ink);">Long Term Support — boring on purpose, patched for ~5 years.</p>
+        <p style="margin: 0; font: 400 27px/1.5 var(--sans); color: var(--dim);">The choice for servers and people who like sleep.</p>
+        <div style="margin-top: auto; font: 500 25px var(--mono); color: var(--dim);">ubuntu LTS · debian stable</div>
+      </div>
+    </div>
+    <div style="margin-top: auto; display: flex; justify-content: space-between; font: 500 24px var(--mono); color: var(--faint);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+  <!-- ══════════ 10 · PACKAGE MANAGERS ══════════ -->
+  <section data-label="Package Managers" data-screen-label="Package managers" style="background-color: var(--bg); background-image: linear-gradient(rgba(122,148,97,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(122,148,97,0.14) 1px, transparent 1px); background-size: 96px 96px; color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; padding: var(--pad-top) var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="font: 500 24px var(--mono); color: var(--green); letter-spacing: 0.1em;">## concepts</div>
+    <h1 style="margin: 20px 0 0; font: 800 var(--type-title)/1.12 var(--mono); letter-spacing: -0.01em; color: var(--ink);">Package Managers</h1>
+    <p style="margin: 36px 0 0; font: 400 34px/1.5 var(--sans); color: var(--soft); max-width: 1500px;">An app store, decades before app stores — one command installs, updates and removes software. Each distro family has its own:</p>
+    <div style="margin-top: 44px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px;">
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;">
+        <div style="padding: 12px 20px; background: var(--panel2); border-bottom: 1px solid var(--line); font: 500 24px var(--mono); color: var(--green);">debian / ubuntu / mint</div>
+        <pre style="margin: 0; padding: 22px 24px; font: 500 24px/1.7 var(--mono); color: var(--ink); white-space: pre-wrap;"><span style="color: var(--green);">$</span> sudo apt install btop</pre>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;">
+        <div style="padding: 12px 20px; background: var(--panel2); border-bottom: 1px solid var(--line); font: 500 24px var(--mono); color: var(--green);">fedora / RHEL</div>
+        <pre style="margin: 0; padding: 22px 24px; font: 500 24px/1.7 var(--mono); color: var(--ink); white-space: pre-wrap;"><span style="color: var(--green);">$</span> sudo dnf install btop</pre>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;">
+        <div style="padding: 12px 20px; background: var(--panel2); border-bottom: 1px solid var(--line); font: 500 24px var(--mono); color: var(--green);">arch / steamOS</div>
+        <pre style="margin: 0; padding: 22px 24px; font: 500 24px/1.7 var(--mono); color: var(--ink); white-space: pre-wrap;"><span style="color: var(--green);">$</span> sudo pacman -S btop</pre>
+      </div>
+    </div>
+    <div style="margin-top: 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 34px 38px;">
+        <div style="font: 700 27px var(--mono); color: var(--green);">why it beats downloading installers</div>
+        <p style="margin: 16px 0 0; font: 400 27px/1.55 var(--sans); color: var(--soft);">Signed packages from a trusted archive, dependencies resolved for you, and <span style="font: 500 25px var(--mono); color: var(--ink);">one command updates everything</span> at once.</p>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 34px 38px;">
+        <div style="font: 700 27px var(--mono); color: var(--green);">snap &amp; flatpak</div>
+        <p style="margin: 16px 0 0; font: 400 27px/1.55 var(--sans); color: var(--soft);">The newer, distro-agnostic ones — sandboxed apps that run anywhere, at the cost of bigger downloads.</p>
+      </div>
+    </div>
+    <div style="margin-top: auto; display: flex; justify-content: space-between; font: 500 24px var(--mono); color: var(--faint);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+  <!-- ══════════ 11 · DESKTOPS ══════════ -->
+  <section data-label="Desktops" data-screen-label="Desktop environments" style="background-color: var(--bg); background-image: linear-gradient(rgba(122,148,97,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(122,148,97,0.14) 1px, transparent 1px); background-size: 96px 96px; color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; padding: var(--pad-top) var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="font: 500 24px var(--mono); color: var(--green); letter-spacing: 0.1em;">## concepts</div>
+    <h1 style="margin: 20px 0 0; font: 800 var(--type-title)/1.12 var(--mono); letter-spacing: -0.01em; color: var(--ink);">Desktop Environments</h1>
+    <p style="margin: 36px 0 0; font: 400 34px/1.5 var(--sans); color: var(--soft);">The look and feel is a separate, swappable layer. Same OS underneath.</p>
+    <div style="margin-top: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 36px 42px; display: flex; justify-content: space-between; align-items: baseline; gap: 32px;">
+        <div style="font: 700 31px var(--mono); color: var(--green);">GNOME</div>
+        <div style="font: 400 28px/1.4 var(--sans); color: var(--soft); text-align: right;">Clean and modern. The default on Ubuntu &amp; Fedora.</div>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 36px 42px; display: flex; justify-content: space-between; align-items: baseline; gap: 32px;">
+        <div style="font: 700 31px var(--mono); color: var(--green);">KDE Plasma</div>
+        <div style="font: 400 28px/1.4 var(--sans); color: var(--soft); text-align: right;">Tweak absolutely everything. Rich and configurable.</div>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 36px 42px; display: flex; justify-content: space-between; align-items: baseline; gap: 32px;">
+        <div style="font: 700 31px var(--mono); color: var(--green);">COSMIC</div>
+        <div style="font: 400 28px/1.4 var(--sans); color: var(--soft); text-align: right;">The new kid, built in Rust by System76. Default on Pop!_OS.</div>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 36px 42px; display: flex; justify-content: space-between; align-items: baseline; gap: 32px;">
+        <div style="font: 700 31px var(--mono); color: var(--green);">Hyprland</div>
+        <div style="font: 400 28px/1.4 var(--sans); color: var(--soft); text-align: right;">Keyboard-driven tiling, famously flashy. You'll see it at camp.</div>
+      </div>
+    </div>
+    <div style="margin-top: 48px; font: 500 26px/1.7 var(--mono); color: var(--dim);"># try a few — you can install several and pick at the login screen.</div>
+    <div style="margin-top: auto; display: flex; justify-content: space-between; font: 500 24px var(--mono); color: var(--faint);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+  <!-- ══════════ 12 · CHOOSING ══════════ -->
+  <section data-label="Choosing" data-screen-label="Choosing your first distro" style="background-color: var(--bg); background-image: linear-gradient(rgba(122,148,97,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(122,148,97,0.14) 1px, transparent 1px); background-size: 96px 96px; color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; padding: var(--pad-top) var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="font: 500 24px var(--mono); color: var(--green); letter-spacing: 0.1em;">## concepts</div>
+    <h1 style="margin: 20px 0 0; font: 800 var(--type-title)/1.12 var(--mono); letter-spacing: -0.01em; color: var(--ink);">Choosing Your First Distro</h1>
+    <div style="margin-top: 56px; display: flex; flex-direction: column; gap: 20px; max-width: 1560px;">
+      <div style="display: grid; grid-template-columns: 1fr 90px 460px; align-items: center; gap: 28px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 28px 40px;">
+        <div style="font: 400 31px var(--sans); color: var(--ink);">"I just want it to work"</div>
+        <div style="font: 500 30px var(--mono); color: var(--green); text-align: center;">→</div>
+        <div style="font: 700 30px var(--mono); color: var(--green);">Ubuntu / Mint</div>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 90px 460px; align-items: center; gap: 28px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 28px 40px;">
+        <div style="font: 400 31px var(--sans); color: var(--ink);">"I want the newest shiny things"</div>
+        <div style="font: 500 30px var(--mono); color: var(--green); text-align: center;">→</div>
+        <div style="font: 700 30px var(--mono); color: var(--green);">Fedora</div>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 90px 460px; align-items: center; gap: 28px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 28px 40px;">
+        <div style="font: 400 31px var(--sans); color: var(--ink);">"This laptop is older than my nephew"</div>
+        <div style="font: 500 30px var(--mono); color: var(--green); text-align: center;">→</div>
+        <div style="font: 700 30px var(--mono); color: var(--green);">Mint XFCE / Lubuntu</div>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 90px 460px; align-items: center; gap: 28px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 28px 40px;">
+        <div style="font: 400 31px var(--sans); color: var(--ink);">"I want to understand every bolt"</div>
+        <div style="font: 500 30px var(--mono); color: var(--green); text-align: center;">→</div>
+        <div style="font: 700 30px var(--mono); color: var(--green);">Arch (later!)</div>
+      </div>
+    </div>
+    <div style="margin-top: 52px; font: 500 26px/1.7 var(--mono); color: var(--dim);"># there is no wrong answer. distro-hopping is a rite of passage — try them from a USB stick first.</div>
+    <div style="margin-top: auto; display: flex; justify-content: space-between; font: 500 24px var(--mono); color: var(--faint);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+  <!-- ══════════ 13 · DIVIDER PART 2 ══════════ -->
+  <section data-label="Part 2" data-screen-label="Part 2 the terminal" style="background: var(--green); color: #f4f1e8; font-family: var(--sans); display: flex; flex-direction: column; padding: var(--pad-top) var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="display: flex; flex-direction: column; justify-content: center; flex: 1;">
+      <div style="font: 500 34px var(--mono); color: rgba(244,241,232,0.75);">you@bornhack:~$ cd ../part-2/</div>
+      <h1 style="margin: 32px 0 0; font: 800 120px/1.04 var(--mono); letter-spacing: -0.02em; color: #f4f1e8;">Part 2</h1>
+      <div style="margin-top: 12px; font: 500 56px var(--mono); color: #f4f1e8;">The terminal</div>
+      <div style="margin-top: 40px; font: 500 32px var(--mono); color: rgba(244,241,232,0.75);">lids up. terminals open. this part is hands-on.</div>
+    </div>
+    <div style="display: flex; justify-content: space-between; font: 500 24px var(--mono); color: rgba(244,241,232,0.7);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+  <!-- ══════════ 14 · WHY THE TERMINAL ══════════ -->
+  <section data-label="Why Terminal" data-screen-label="Why the terminal" style="background-color: var(--bg); background-image: linear-gradient(rgba(122,148,97,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(122,148,97,0.14) 1px, transparent 1px); background-size: 96px 96px; color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; padding: var(--pad-top) var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="font: 500 24px var(--mono); color: var(--green); letter-spacing: 0.1em;">## the shell</div>
+    <h1 style="margin: 20px 0 0; font: 800 var(--type-title)/1.12 var(--mono); letter-spacing: -0.01em; color: var(--ink);">Why the Terminal?</h1>
+    <div style="margin-top: 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: 34px;">
+        <div style="display: flex; gap: 24px;">
+          <span style="font: 700 30px var(--mono); color: var(--green);">&gt;</span>
+          <p style="margin: 0; font: 400 30px/1.55 var(--sans); color: var(--soft);"><strong style="color: var(--ink);">Faster</strong> — one line beats twelve clicks.</p>
+        </div>
+        <div style="display: flex; gap: 24px;">
+          <span style="font: 700 30px var(--mono); color: var(--green);">&gt;</span>
+          <p style="margin: 0; font: 400 30px/1.55 var(--sans); color: var(--soft);"><strong style="color: var(--ink);">Scriptable</strong> — anything you can type, you can automate.</p>
+        </div>
+        <div style="display: flex; gap: 24px;">
+          <span style="font: 700 30px var(--mono); color: var(--green);">&gt;</span>
+          <p style="margin: 0; font: 400 30px/1.55 var(--sans); color: var(--soft);"><strong style="color: var(--ink);">Universal</strong> — same commands on every distro, every server, over SSH.</p>
+        </div>
+        <div style="display: flex; gap: 24px;">
+          <span style="font: 700 30px var(--mono); color: var(--green);">&gt;</span>
+          <p style="margin: 0; font: 400 30px/1.55 var(--sans); color: var(--soft);"><strong style="color: var(--ink);">Honest</strong> — it tells you exactly what happened, and why not.</p>
+        </div>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;">
+        <div style="display: flex; align-items: center; gap: 9px; padding: 12px 20px; background: var(--panel2); border-bottom: 1px solid var(--line);">
+          <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+          <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+          <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+          <span style="margin-left: 10px; font: 500 24px var(--mono); color: var(--dim);">the plan for part 2</span>
+        </div>
+        <pre style="margin: 0; padding: 26px 30px; font: 500 26px/1.85 var(--mono); color: var(--ink); white-space: pre-wrap;"><span style="color: var(--green);">$</span> pwd · ls · cd
+<span style="color: var(--dim);">→ find your way around
+</span><span style="color: var(--green);">$</span> mkdir · touch · nano · cp · mv · rm
+<span style="color: var(--dim);">→ make, edit, move, delete
+</span><span style="color: var(--green);">$</span> man · tldr · btop
+<span style="color: var(--dim);">→ help yourself + watch your machine</span></pre>
+      </div>
+    </div>
+    <div style="margin-top: 52px; font: 500 26px/1.7 var(--mono); color: var(--dim);"># every hacker movie lied about what it looks like. the real thing is better.</div>
+    <div style="margin-top: auto; display: flex; justify-content: space-between; font: 500 24px var(--mono); color: var(--faint);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+  <!-- ══════════ 15 · TASK 0 GET A TERMINAL ══════════ -->
+  <section data-label="Task 0 Terminal" data-screen-label="Task 0 get a terminal" style="background-color: var(--bg); background-image: linear-gradient(rgba(122,148,97,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(122,148,97,0.14) 1px, transparent 1px); background-size: 96px 96px; color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; padding: 80px var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="display: flex; align-items: center; gap: 22px;">
+      <span style="font: 700 26px var(--mono); color: #3a4433; background: var(--amber); padding: 8px 18px; border-radius: 6px; letter-spacing: 0.06em;">TASK 0</span>
+      <span style="font: 500 24px var(--mono); color: var(--amber); letter-spacing: 0.08em;">hands-on — everyone</span>
+    </div>
+    <h1 style="margin: 18px 0 0; font: 800 var(--type-title)/1.12 var(--mono); letter-spacing: -0.01em; color: var(--ink);">Get a Terminal</h1>
+    <div style="margin-top: 44px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px;">
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 36px 38px; display: flex; flex-direction: column; gap: 18px;">
+        <div style="font: 700 29px var(--mono); color: var(--green);">already on Linux</div>
+        <p style="margin: 0; font: 400 28px/1.5 var(--sans); color: var(--soft);">Press <span style="font: 500 26px var(--mono); color: var(--ink);">Ctrl+Alt+T</span>, or find "Terminal" in your app menu.</p>
+        <div style="margin-top: auto; font: 500 24px var(--mono); color: var(--dim);"># you're done. smug is allowed.</div>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 36px 38px; display: flex; flex-direction: column; gap: 18px;">
+        <div style="font: 700 29px var(--mono); color: var(--green);">on macOS</div>
+        <p style="margin: 0; font: 400 28px/1.5 var(--sans); color: var(--soft);">Open <span style="font: 500 26px var(--mono); color: var(--ink);">Terminal.app</span>. macOS is Unix family — nearly everything today works the same.</p>
+        <div style="margin-top: auto; font: 500 24px var(--mono); color: var(--dim);"># use brew instead of apt</div>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 36px 38px; display: flex; flex-direction: column; gap: 18px;">
+        <div style="font: 700 29px var(--mono); color: var(--green);">on Windows</div>
+        <p style="margin: 0; font: 400 28px/1.5 var(--sans); color: var(--soft);">PowerShell as admin → <span style="font: 500 26px var(--mono); color: var(--ink);">wsl --install</span>, reboot — a real Ubuntu inside Windows.</p>
+        <div style="margin-top: auto; font: 500 24px var(--mono); color: var(--dim);"># or grab a live USB from us</div>
+      </div>
+    </div>
+    <div style="margin-top: 40px; background: var(--panel); border: 1px solid var(--green); border-radius: 12px; padding: 28px 32px; display: flex; align-items: center; gap: 24px;">
+      <span style="font: 700 26px var(--mono); color: var(--green);">→</span>
+      <div style="font: 400 29px/1.5 var(--sans); color: var(--ink);">Checkpoint: everyone sees a blinking cursor before we move on. Neighbours help neighbours.</div>
+    </div>
+    <div style="margin-top: auto; display: flex; justify-content: space-between; font: 500 24px var(--mono); color: var(--faint);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+  <!-- ══════════ 16 · READING THE PROMPT ══════════ -->
+  <section data-label="Prompt" data-screen-label="Reading the prompt" style="background-color: var(--bg); background-image: linear-gradient(rgba(122,148,97,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(122,148,97,0.14) 1px, transparent 1px); background-size: 96px 96px; color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; padding: var(--pad-top) var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="font: 500 24px var(--mono); color: var(--green); letter-spacing: 0.1em;">## the shell</div>
+    <h1 style="margin: 20px 0 0; font: 800 var(--type-title)/1.12 var(--mono); letter-spacing: -0.01em; color: var(--ink);">Reading the Prompt</h1>
+    <div style="margin-top: 90px; display: flex; justify-content: center;">
+      <div style="font: 600 76px var(--mono); letter-spacing: -0.01em;">
+        <span style="color: var(--green);">alice</span><span style="color: var(--faint);">@</span><span style="color: var(--ink);">campbox</span><span style="color: var(--faint);">:</span><span style="color: var(--amber);">~</span><span style="color: var(--ink);">$</span><span style="display: inline-block; width: 30px; height: 62px; background: var(--ink); vertical-align: middle; margin-left: 18px; animation: blink 1.1s steps(1) infinite;"></span>
+      </div>
+    </div>
+    <div style="margin-top: 90px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;">
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 30px 34px;">
+        <div style="font: 700 30px var(--mono); color: var(--green);">alice</div>
+        <p style="margin: 12px 0 0; font: 400 27px/1.4 var(--sans); color: var(--soft);">who you're logged in as</p>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 30px 34px;">
+        <div style="font: 700 30px var(--mono); color: var(--ink);">campbox</div>
+        <p style="margin: 12px 0 0; font: 400 27px/1.4 var(--sans); color: var(--soft);">which machine — matters over SSH</p>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 30px 34px;">
+        <div style="font: 700 30px var(--mono); color: var(--amber);">~</div>
+        <p style="margin: 12px 0 0; font: 400 27px/1.4 var(--sans); color: var(--soft);">where you are — ~ means your home folder</p>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 30px 34px;">
+        <div style="font: 700 30px var(--mono); color: var(--ink);">$</div>
+        <p style="margin: 12px 0 0; font: 400 27px/1.4 var(--sans); color: var(--soft);">normal user. if it shows # you are root — extra careful</p>
+      </div>
+    </div>
+    <div style="margin-top: auto; display: flex; justify-content: space-between; font: 500 24px var(--mono); color: var(--faint);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+  <!-- ══════════ 17 · TASK 1 NAVIGATE ══════════ -->
+  <section data-label="Task 1 Navigate" data-screen-label="Task 1 pwd ls cd" style="background-color: var(--bg); background-image: linear-gradient(rgba(122,148,97,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(122,148,97,0.14) 1px, transparent 1px); background-size: 96px 96px; color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; padding: 80px var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="display: flex; align-items: center; gap: 22px;">
+      <span style="font: 700 26px var(--mono); color: #3a4433; background: var(--amber); padding: 8px 18px; border-radius: 6px; letter-spacing: 0.06em;">TASK 1</span>
+      <span style="font: 500 24px var(--mono); color: var(--amber); letter-spacing: 0.08em;">hands-on</span>
+    </div>
+    <h1 style="margin: 18px 0 0; font: 800 var(--type-title)/1.12 var(--mono); letter-spacing: -0.01em; color: var(--ink);">Find Your Way: pwd · ls · cd</h1>
+    <div style="margin-top: 44px; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 44px; align-items: start;">
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;">
+        <div style="display: flex; align-items: center; gap: 9px; padding: 12px 20px; background: var(--panel2); border-bottom: 1px solid var(--line);">
+          <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+          <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+          <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+          <span style="margin-left: 10px; font: 500 24px var(--mono); color: var(--dim);">type along</span>
+        </div>
+        <pre style="margin: 0; padding: 26px 30px; font: 500 26px/1.85 var(--mono); color: var(--ink); white-space: pre-wrap;"><span style="color: var(--green);">$</span> pwd
+<span style="color: #7a9461;">/home/alice
+</span><span style="color: var(--green);">$</span> ls
+<span style="color: #7a9461;">Desktop  Documents  Downloads
+</span><span style="color: var(--green);">$</span> ls -la   <span style="color: #818678;"># hidden files start with a dot
+</span><span style="color: var(--green);">$</span> cd /
+<span style="color: var(--green);">$</span> ls       <span style="color: #818678;"># the root of everything
+</span><span style="color: var(--green);">$</span> cd       <span style="color: #818678;"># no argument = back home</span></pre>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="display: grid; grid-template-columns: auto 1fr; gap: 12px 24px; font: 400 27px/1.5 var(--sans); color: var(--soft); align-items: baseline;">
+          <span style="font: 500 25px var(--mono); color: var(--green);">pwd</span><span>print working directory — "where am I?"</span>
+          <span style="font: 500 25px var(--mono); color: var(--green);">ls</span><span>list what's here</span>
+          <span style="font: 500 25px var(--mono); color: var(--green);">cd dir</span><span>go there</span>
+          <span style="font: 500 25px var(--mono); color: var(--green);">cd ..</span><span>one level up</span>
+          <span style="font: 500 25px var(--mono); color: var(--green);">cd</span><span>straight home</span>
+        </div>
+        <div style="margin-top: 8px; font: 500 25px/1.7 var(--mono); color: var(--dim);"># superpowers: Tab completes names · ↑ repeats the last command</div>
+      </div>
+    </div>
+    <div style="margin-top: auto; display: flex; justify-content: space-between; font: 500 24px var(--mono); color: var(--faint);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+  <!-- ══════════ 18 · TASK 2 MAKE ══════════ -->
+  <section data-label="Task 2 Make" data-screen-label="Task 2 mkdir touch" style="background-color: var(--bg); background-image: linear-gradient(rgba(122,148,97,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(122,148,97,0.14) 1px, transparent 1px); background-size: 96px 96px; color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; padding: 80px var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="display: flex; align-items: center; gap: 22px;">
+      <span style="font: 700 26px var(--mono); color: #3a4433; background: var(--amber); padding: 8px 18px; border-radius: 6px; letter-spacing: 0.06em;">TASK 2</span>
+      <span style="font: 500 24px var(--mono); color: var(--amber); letter-spacing: 0.08em;">hands-on</span>
+    </div>
+    <h1 style="margin: 18px 0 0; font: 800 var(--type-title)/1.12 var(--mono); letter-spacing: -0.01em; color: var(--ink);">Make Things: mkdir · touch</h1>
+    <div style="margin-top: 44px; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 44px; align-items: start;">
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;">
+        <div style="display: flex; align-items: center; gap: 9px; padding: 12px 20px; background: var(--panel2); border-bottom: 1px solid var(--line);">
+          <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+          <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+          <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+          <span style="margin-left: 10px; font: 500 24px var(--mono); color: var(--dim);">type along</span>
+        </div>
+        <pre style="margin: 0; padding: 26px 30px; font: 500 26px/1.85 var(--mono); color: var(--ink); white-space: pre-wrap;"><span style="color: var(--green);">$</span> cd
+<span style="color: var(--green);">$</span> mkdir bornhack
+<span style="color: var(--green);">$</span> cd bornhack
+<span style="color: var(--green);">$</span> touch notes.txt
+<span style="color: var(--green);">$</span> ls
+<span style="color: #7a9461;">notes.txt
+</span><span style="color: var(--green);">$</span> mkdir -p camp/tent   <span style="color: #818678;"># nested, in one go</span></pre>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="display: grid; grid-template-columns: auto 1fr; gap: 12px 24px; font: 400 27px/1.5 var(--sans); color: var(--soft); align-items: baseline;">
+          <span style="font: 500 25px var(--mono); color: var(--green);">mkdir</span><span>make a directory (folder)</span>
+          <span style="font: 500 25px var(--mono); color: var(--green);">touch</span><span>create an empty file — or update its timestamp</span>
+          <span style="font: 500 25px var(--mono); color: var(--green);">-p</span><span>create parent folders as needed</span>
+        </div>
+        <div style="background: var(--panel); border: 1px solid var(--green); border-radius: 12px; padding: 24px 28px; font: 400 27px/1.5 var(--sans); color: var(--ink);">This <span style="font: 500 25px var(--mono); color: var(--green);">bornhack</span> folder is our sandbox for the rest of the workshop.</div>
+        <div style="font: 500 25px/1.7 var(--mono); color: var(--dim);"># no "are you sure?" dialogs. it just does it. that's the deal here.</div>
+      </div>
+    </div>
+    <div style="margin-top: auto; display: flex; justify-content: space-between; font: 500 24px var(--mono); color: var(--faint);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+  <!-- ══════════ 19 · TASK 3 NANO ══════════ -->
+  <section data-label="Task 3 Nano" data-screen-label="Task 3 nano" style="background-color: var(--bg); background-image: linear-gradient(rgba(122,148,97,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(122,148,97,0.14) 1px, transparent 1px); background-size: 96px 96px; color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; padding: 80px var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="display: flex; align-items: center; gap: 22px;">
+      <span style="font: 700 26px var(--mono); color: #3a4433; background: var(--amber); padding: 8px 18px; border-radius: 6px; letter-spacing: 0.06em;">TASK 3</span>
+      <span style="font: 500 24px var(--mono); color: var(--amber); letter-spacing: 0.08em;">hands-on</span>
+    </div>
+    <h1 style="margin: 18px 0 0; font: 800 var(--type-title)/1.12 var(--mono); letter-spacing: -0.01em; color: var(--ink);">Edit a File: nano</h1>
+    <div style="margin-top: 44px; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 44px; align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;">
+          <div style="padding: 14px 24px; background: var(--panel2); border-bottom: 1px solid var(--line); font: 500 24px var(--mono); color: var(--dim);">GNU nano 7.2 — notes.txt</div>
+          <div style="padding: 26px 30px; font: 500 26px/1.7 var(--mono); color: var(--ink); min-height: 110px;">BornHack ideas: solder a badge, visit the sauna_</div>
+          <div style="display: flex; gap: 26px; padding: 18px 24px; border-top: 1px solid var(--line); font: 500 24px var(--mono); flex-wrap: wrap;">
+            <span style="color: var(--soft);"><span style="background: var(--ink); color: var(--bg); padding: 2px 10px; border-radius: 4px;">^O</span> Write Out</span>
+            <span style="color: var(--soft);"><span style="background: var(--ink); color: var(--bg); padding: 2px 10px; border-radius: 4px;">^X</span> Exit</span>
+            <span style="color: var(--soft);"><span style="background: var(--ink); color: var(--bg); padding: 2px 10px; border-radius: 4px;">^K</span> Cut</span>
+          </div>
+        </div>
+        <p style="margin: 0; font: 400 29px/1.5 var(--sans); color: var(--soft);">That <span style="font: 500 26px var(--mono); color: var(--ink);">^</span> means Ctrl — so <span style="font: 500 26px var(--mono); color: var(--ink);">Ctrl+O</span> saves, <span style="font: 500 26px var(--mono); color: var(--ink);">Ctrl+X</span> quits. The cheat sheet is always on screen.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;">
+          <div style="display: flex; align-items: center; gap: 9px; padding: 12px 20px; background: var(--panel2); border-bottom: 1px solid var(--line);">
+            <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+            <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+            <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+            <span style="margin-left: 10px; font: 500 24px var(--mono); color: var(--dim);">type along</span>
+          </div>
+          <pre style="margin: 0; padding: 26px 30px; font: 500 26px/1.85 var(--mono); color: var(--ink); white-space: pre-wrap;"><span style="color: var(--green);">$</span> nano notes.txt
+<span style="color: #818678;"># write a line or two
+# ctrl-o, enter = save
+# ctrl-x = quit
+</span><span style="color: var(--green);">$</span> cat notes.txt   <span style="color: #818678;"># did it stick?</span></pre>
+        </div>
+        <div style="font: 500 25px/1.7 var(--mono); color: var(--dim);"># yes, we skipped vim. you're welcome.<br># trapped in it one day: Esc :q! — remember that.</div>
+      </div>
+    </div>
+    <div style="margin-top: auto; display: flex; justify-content: space-between; font: 500 24px var(--mono); color: var(--faint);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+  <!-- ══════════ 20 · TASK 4 READ ══════════ -->
+  <section data-label="Task 4 Read" data-screen-label="Task 4 cat less" style="background-color: var(--bg); background-image: linear-gradient(rgba(122,148,97,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(122,148,97,0.14) 1px, transparent 1px); background-size: 96px 96px; color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; padding: 80px var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="display: flex; align-items: center; gap: 22px;">
+      <span style="font: 700 26px var(--mono); color: #3a4433; background: var(--amber); padding: 8px 18px; border-radius: 6px; letter-spacing: 0.06em;">TASK 4</span>
+      <span style="font: 500 24px var(--mono); color: var(--amber); letter-spacing: 0.08em;">hands-on</span>
+    </div>
+    <h1 style="margin: 18px 0 0; font: 800 var(--type-title)/1.12 var(--mono); letter-spacing: -0.01em; color: var(--ink);">Read Files: cat · less</h1>
+    <div style="margin-top: 44px; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 44px; align-items: start;">
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;">
+        <div style="display: flex; align-items: center; gap: 9px; padding: 12px 20px; background: var(--panel2); border-bottom: 1px solid var(--line);">
+          <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+          <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+          <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+          <span style="margin-left: 10px; font: 500 24px var(--mono); color: var(--dim);">type along</span>
+        </div>
+        <pre style="margin: 0; padding: 26px 30px; font: 500 26px/1.85 var(--mono); color: var(--ink); white-space: pre-wrap;"><span style="color: var(--green);">$</span> cat notes.txt
+<span style="color: #7a9461;">BornHack ideas: solder a badge, visit the sauna
+</span><span style="color: var(--green);">$</span> cat /etc/os-release   <span style="color: #818678;"># your distro's ID card
+</span><span style="color: var(--green);">$</span> less /var/log/syslog  <span style="color: #818678;"># something properly long
+</span><span style="color: #818678;">   scroll: arrows · search: /wifi · quit: q</span></pre>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="display: grid; grid-template-columns: auto 1fr; gap: 12px 24px; font: 400 27px/1.5 var(--sans); color: var(--soft); align-items: baseline;">
+          <span style="font: 500 25px var(--mono); color: var(--green);">cat</span><span>dump the whole file — great for short ones</span>
+          <span style="font: 500 25px var(--mono); color: var(--green);">less</span><span>page through long ones at your own pace</span>
+          <span style="font: 500 25px var(--mono); color: var(--green);">q</span><span>the escape hatch — also works in man</span>
+        </div>
+        <div style="margin-top: 8px; font: 500 25px/1.7 var(--mono); color: var(--dim);"># cat = curiosity. less = curiosity with scroll.</div>
+      </div>
+    </div>
+    <div style="margin-top: auto; display: flex; justify-content: space-between; font: 500 24px var(--mono); color: var(--faint);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+  <!-- ══════════ 21 · TASK 5 MOVE ══════════ -->
+  <section data-label="Task 5 Move" data-screen-label="Task 5 cp mv" style="background-color: var(--bg); background-image: linear-gradient(rgba(122,148,97,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(122,148,97,0.14) 1px, transparent 1px); background-size: 96px 96px; color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; padding: 80px var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="display: flex; align-items: center; gap: 22px;">
+      <span style="font: 700 26px var(--mono); color: #3a4433; background: var(--amber); padding: 8px 18px; border-radius: 6px; letter-spacing: 0.06em;">TASK 5</span>
+      <span style="font: 500 24px var(--mono); color: var(--amber); letter-spacing: 0.08em;">hands-on</span>
+    </div>
+    <h1 style="margin: 18px 0 0; font: 800 var(--type-title)/1.12 var(--mono); letter-spacing: -0.01em; color: var(--ink);">Copy &amp; Move: cp · mv</h1>
+    <div style="margin-top: 44px; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 44px; align-items: start;">
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;">
+        <div style="display: flex; align-items: center; gap: 9px; padding: 12px 20px; background: var(--panel2); border-bottom: 1px solid var(--line);">
+          <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+          <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+          <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+          <span style="margin-left: 10px; font: 500 24px var(--mono); color: var(--dim);">type along</span>
+        </div>
+        <pre style="margin: 0; padding: 26px 30px; font: 500 26px/1.85 var(--mono); color: var(--ink); white-space: pre-wrap;"><span style="color: var(--green);">$</span> cp notes.txt backup.txt
+<span style="color: var(--green);">$</span> mv backup.txt ideas.txt   <span style="color: #818678;"># rename = move
+</span><span style="color: var(--green);">$</span> mv ideas.txt camp/
+<span style="color: var(--green);">$</span> ls camp
+<span style="color: #7a9461;">ideas.txt  tent</span></pre>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="display: grid; grid-template-columns: auto 1fr; gap: 12px 24px; font: 400 27px/1.5 var(--sans); color: var(--soft); align-items: baseline;">
+          <span style="font: 500 25px var(--mono); color: var(--green);">cp from to</span><span>copy — add <span style="font: 500 25px var(--mono); color: var(--ink);">-r</span> for folders</span>
+          <span style="font: 500 25px var(--mono); color: var(--green);">mv from to</span><span>move — which is also how you <strong style="color: var(--ink);">rename</strong>. There is no rename command; this is it</span>
+        </div>
+        <div style="margin-top: 8px; font: 500 25px/1.7 var(--mono); color: var(--dim);"># mv will happily overwrite a file with the same name. no warning. remember that.</div>
+      </div>
+    </div>
+    <div style="margin-top: auto; display: flex; justify-content: space-between; font: 500 24px var(--mono); color: var(--faint);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+  <!-- ══════════ 22 · TASK 6 RM ══════════ -->
+  <section data-label="Task 6 Delete" data-screen-label="Task 6 rm" style="background-color: var(--bg); background-image: linear-gradient(rgba(122,148,97,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(122,148,97,0.14) 1px, transparent 1px); background-size: 96px 96px; color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; padding: 80px var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="display: flex; align-items: center; gap: 22px;">
+      <span style="font: 700 26px var(--mono); color: #3a4433; background: var(--amber); padding: 8px 18px; border-radius: 6px; letter-spacing: 0.06em;">TASK 6</span>
+      <span style="font: 500 24px var(--mono); color: var(--amber); letter-spacing: 0.08em;">hands-on — careful now</span>
+    </div>
+    <h1 style="margin: 18px 0 0; font: 800 var(--type-title)/1.12 var(--mono); letter-spacing: -0.01em; color: var(--ink);">Delete Things: rm</h1>
+    <div style="margin-top: 44px; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 44px; align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;">
+          <div style="display: flex; align-items: center; gap: 9px; padding: 12px 20px; background: var(--panel2); border-bottom: 1px solid var(--line);">
+            <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+            <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+            <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+            <span style="margin-left: 10px; font: 500 24px var(--mono); color: var(--dim);">type along</span>
+          </div>
+          <pre style="margin: 0; padding: 26px 30px; font: 500 26px/1.85 var(--mono); color: var(--ink); white-space: pre-wrap;"><span style="color: var(--green);">$</span> rm camp/ideas.txt
+<span style="color: var(--green);">$</span> mkdir junk
+<span style="color: var(--green);">$</span> rm -r junk        <span style="color: #818678;"># -r = folder + contents
+</span><span style="color: var(--green);">$</span> rm -i notes.txt   <span style="color: #818678;"># -i asks first — answer n!
+</span><span style="color: #7a9461;">rm: remove regular file 'notes.txt'? n</span></pre>
+        </div>
+        <div style="font: 500 25px/1.7 var(--mono); color: var(--dim);"># keep notes.txt alive — we still need it.</div>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--amber); border-radius: 12px; padding: 34px 38px; display: flex; flex-direction: column; gap: 18px;">
+        <div style="font: 700 29px var(--mono); color: var(--amber);">⚠ there is no trash can</div>
+        <p style="margin: 0; font: 400 29px/1.5 var(--sans); color: var(--ink);">No undo. No "recently deleted". Gone means gone.</p>
+        <p style="margin: 0; font: 400 27px/1.5 var(--sans); color: var(--soft);">And never run the infamous <span style="font: 500 25px var(--mono); color: var(--amber); white-space: nowrap;">sudo rm -rf /</span> — it deletes the entire system. People online suggest it as a "joke". It is not.</p>
+      </div>
+    </div>
+    <div style="margin-top: auto; display: flex; justify-content: space-between; font: 500 24px var(--mono); color: var(--faint);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+  <!-- ══════════ 23 · TASK 7 MAN TLDR ══════════ -->
+  <section data-label="Task 7 Help" data-screen-label="Task 7 man tldr" style="background-color: var(--bg); background-image: linear-gradient(rgba(122,148,97,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(122,148,97,0.14) 1px, transparent 1px); background-size: 96px 96px; color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; padding: 80px var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="display: flex; align-items: center; gap: 22px;">
+      <span style="font: 700 26px var(--mono); color: #3a4433; background: var(--amber); padding: 8px 18px; border-radius: 6px; letter-spacing: 0.06em;">TASK 7</span>
+      <span style="font: 500 24px var(--mono); color: var(--amber); letter-spacing: 0.08em;">hands-on — your first install</span>
+    </div>
+    <h1 style="margin: 18px 0 0; font: 800 var(--type-title)/1.12 var(--mono); letter-spacing: -0.01em; color: var(--ink);">Help Yourself: man · tldr</h1>
+    <div style="margin-top: 44px; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 44px; align-items: start;">
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;">
+        <div style="display: flex; align-items: center; gap: 9px; padding: 12px 20px; background: var(--panel2); border-bottom: 1px solid var(--line);">
+          <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+          <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+          <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+          <span style="margin-left: 10px; font: 500 24px var(--mono); color: var(--dim);">type along</span>
+        </div>
+        <pre style="margin: 0; padding: 26px 30px; font: 500 26px/1.85 var(--mono); color: var(--ink); white-space: pre-wrap;"><span style="color: var(--green);">$</span> man tar               <span style="color: #818678;"># behold. q to escape
+</span><span style="color: var(--green);">$</span> sudo apt install tldr
+<span style="color: #818678;">[sudo] password:         # typing shows nothing — normal
+</span><span style="color: var(--green);">$</span> tldr tar              <span style="color: #818678;"># first run updates its cache
+</span><span style="color: var(--green);">$</span> tldr mv
+<span style="color: var(--green);">$</span> tldr ls</pre>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="display: grid; grid-template-columns: auto 1fr; gap: 12px 24px; font: 400 27px/1.5 var(--sans); color: var(--soft); align-items: baseline;">
+          <span style="font: 500 25px var(--mono); color: var(--green);">man</span><span>the official manual — complete, authoritative, ~1,100 lines for tar. Every flag since 1979</span>
+          <span style="font: 500 25px var(--mono); color: var(--green);">tldr</span><span>community cheat sheets — the 8 examples you actually wanted, ready to copy</span>
+          <span style="font: 500 25px var(--mono); color: var(--green);">sudo</span><span>"do this as administrator" — asks for <em>your</em> password</span>
+        </div>
+        <div style="margin-top: 8px; font: 500 25px/1.7 var(--mono); color: var(--dim);"># fedora: sudo dnf install tldr · arch: sudo pacman -S tldr<br># man = the reference. tldr = the friend who just tells you the answer.</div>
+      </div>
+    </div>
+    <div style="margin-top: auto; display: flex; justify-content: space-between; font: 500 24px var(--mono); color: var(--faint);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+  <!-- ══════════ 24 · TASK 8 BTOP ══════════ -->
+  <section data-label="Task 8 Btop" data-screen-label="Task 8 btop" style="background-color: var(--bg); background-image: linear-gradient(rgba(122,148,97,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(122,148,97,0.14) 1px, transparent 1px); background-size: 96px 96px; color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; padding: 80px var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="display: flex; align-items: center; gap: 22px;">
+      <span style="font: 700 26px var(--mono); color: #3a4433; background: var(--amber); padding: 8px 18px; border-radius: 6px; letter-spacing: 0.06em;">TASK 8</span>
+      <span style="font: 500 24px var(--mono); color: var(--amber); letter-spacing: 0.08em;">hands-on</span>
+    </div>
+    <h1 style="margin: 18px 0 0; font: 800 var(--type-title)/1.12 var(--mono); letter-spacing: -0.01em; color: var(--ink);">Watch the Machine: btop</h1>
+    <div style="margin-top: 44px; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 44px; align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;">
+          <div style="display: flex; align-items: center; gap: 9px; padding: 12px 20px; background: var(--panel2); border-bottom: 1px solid var(--line);">
+            <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+            <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+            <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+            <span style="margin-left: 10px; font: 500 24px var(--mono); color: var(--dim);">btop</span>
+          </div>
+          <div style="padding: 24px 30px; display: flex; flex-direction: column; gap: 12px; font: 500 25px var(--mono);">
+            <div style="display: flex; align-items: center; gap: 16px;"><span style="color: var(--dim); width: 80px;">cpu</span><div style="flex: 1; height: 16px; background: var(--panel2); border-radius: 4px; overflow: hidden;"><div style="width: 38%; height: 100%; background: var(--green);"></div></div><span style="color: var(--green);">38%</span></div>
+            <div style="display: flex; align-items: center; gap: 16px;"><span style="color: var(--dim); width: 80px;">mem</span><div style="flex: 1; height: 16px; background: var(--panel2); border-radius: 4px; overflow: hidden;"><div style="width: 61%; height: 100%; background: var(--amber);"></div></div><span style="color: var(--amber);">61%</span></div>
+            <div style="display: flex; align-items: center; gap: 16px;"><span style="color: var(--dim); width: 80px;">net↓</span><div style="flex: 1; height: 16px; background: var(--panel2); border-radius: 4px; overflow: hidden;"><div style="width: 22%; height: 100%; background: #a3a894;"></div></div><span style="color: var(--dim);">2.1M</span></div>
+            <div style="color: var(--faint); margin-top: 8px;">pid   name        cpu%   mem%</div>
+            <div style="color: var(--ink);">4242  firefox     31.0   24.8</div>
+            <div style="color: var(--ink);">1337  spotify      4.2   11.3</div>
+          </div>
+        </div>
+        <div style="font: 500 25px/1.7 var(--mono); color: var(--dim);"># the answer to "why is my laptop fan screaming?"</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;">
+          <div style="display: flex; align-items: center; gap: 9px; padding: 12px 20px; background: var(--panel2); border-bottom: 1px solid var(--line);">
+            <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+            <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+            <span style="width: 13px; height: 13px; border-radius: 50%; background: #b9baae;"></span>
+            <span style="margin-left: 10px; font: 500 24px var(--mono); color: var(--dim);">type along</span>
+          </div>
+          <pre style="margin: 0; padding: 26px 30px; font: 500 26px/1.85 var(--mono); color: var(--ink); white-space: pre-wrap;"><span style="color: var(--green);">$</span> sudo apt install btop
+<span style="color: var(--green);">$</span> btop</pre>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 14px; font: 400 27px/1.5 var(--sans); color: var(--soft);">
+          <div>Find the hungriest process — open a video tab, watch it climb.</div>
+          <div>Explore with arrow keys; you can even kill a process from here.</div>
+          <div>Quit with <span style="font: 500 25px var(--mono); color: var(--ink);">q</span>.</div>
+        </div>
+        <div style="font: 500 25px/1.7 var(--mono); color: var(--dim);"># older cousins: top (everywhere) · htop (classic). btop is the pretty one.</div>
+      </div>
+    </div>
+    <div style="margin-top: auto; display: flex; justify-content: space-between; font: 500 24px var(--mono); color: var(--faint);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+  <!-- ══════════ 25 · CHEAT SHEET ══════════ -->
+  <section data-label="Cheat Sheet" data-screen-label="Cheat sheet" style="background-color: var(--bg); background-image: linear-gradient(rgba(122,148,97,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(122,148,97,0.14) 1px, transparent 1px); background-size: 96px 96px; color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; padding: var(--pad-top) var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="display: flex; justify-content: space-between; align-items: baseline;">
+      <div style="display: flex; flex-direction: column;">
+        <div style="font: 500 24px var(--mono); color: var(--green); letter-spacing: 0.1em;">## reference</div>
+        <h1 style="margin: 20px 0 0; font: 800 var(--type-title)/1.12 var(--mono); letter-spacing: -0.01em; color: var(--ink);">Cheat Sheet</h1>
+      </div>
+      <div style="font: 500 25px var(--mono); color: var(--dim);"># photo-friendly slide</div>
+    </div>
+    <div style="margin-top: 48px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 30px 34px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="font: 700 25px var(--mono); color: var(--green); letter-spacing: 0.04em;">navigate</div>
+        <div style="font: 500 26px/1.6 var(--mono); color: var(--ink); display: flex; flex-direction: column; gap: 10px;">
+          <div>pwd <span style="color: var(--dim);">— where am I</span></div>
+          <div>ls -la <span style="color: var(--dim);">— what's here</span></div>
+          <div>cd dir <span style="color: var(--dim);">— go there</span></div>
+        </div>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 30px 34px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="font: 700 25px var(--mono); color: var(--green); letter-spacing: 0.04em;">create</div>
+        <div style="font: 500 26px/1.6 var(--mono); color: var(--ink); display: flex; flex-direction: column; gap: 10px;">
+          <div>mkdir dir <span style="color: var(--dim);">— new folder</span></div>
+          <div>touch f.txt <span style="color: var(--dim);">— new file</span></div>
+          <div>nano f.txt <span style="color: var(--dim);">— edit it</span></div>
+        </div>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 30px 34px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="font: 700 25px var(--mono); color: var(--green); letter-spacing: 0.04em;">read</div>
+        <div style="font: 500 26px/1.6 var(--mono); color: var(--ink); display: flex; flex-direction: column; gap: 10px;">
+          <div>cat f.txt <span style="color: var(--dim);">— print it</span></div>
+          <div>less f.txt <span style="color: var(--dim);">— page it</span></div>
+          <div>q <span style="color: var(--dim);">— escape less/man</span></div>
+        </div>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 30px 34px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="font: 700 25px var(--mono); color: var(--green); letter-spacing: 0.04em;">move &amp; delete</div>
+        <div style="font: 500 26px/1.6 var(--mono); color: var(--ink); display: flex; flex-direction: column; gap: 10px;">
+          <div>cp a b <span style="color: var(--dim);">— copy</span></div>
+          <div>mv a b <span style="color: var(--dim);">— move/rename</span></div>
+          <div>rm a <span style="color: var(--amber);">— delete. forever</span></div>
+        </div>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 30px 34px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="font: 700 25px var(--mono); color: var(--green); letter-spacing: 0.04em;">help</div>
+        <div style="font: 500 26px/1.6 var(--mono); color: var(--ink); display: flex; flex-direction: column; gap: 10px;">
+          <div>man cmd <span style="color: var(--dim);">— the manual</span></div>
+          <div>tldr cmd <span style="color: var(--dim);">— just examples</span></div>
+          <div>btop <span style="color: var(--dim);">— system monitor</span></div>
+        </div>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 30px 34px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="font: 700 25px var(--mono); color: var(--green); letter-spacing: 0.04em;">install stuff</div>
+        <div style="font: 500 26px/1.6 var(--mono); color: var(--ink); display: flex; flex-direction: column; gap: 10px;">
+          <div>sudo apt install x <span style="color: var(--dim);">— debian</span></div>
+          <div>sudo dnf install x <span style="color: var(--dim);">— fedora</span></div>
+          <div>sudo pacman -S x <span style="color: var(--dim);">— arch</span></div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 44px; font: 500 26px/1.7 var(--mono); color: var(--dim);"># superpowers: <span style="color: var(--ink);">Tab</span> completes · <span style="color: var(--ink);">↑</span> repeats · <span style="color: var(--ink);">Ctrl+C</span> cancels · <span style="color: var(--ink);">Ctrl+L</span> clears</div>
+    <div style="margin-top: auto; display: flex; justify-content: space-between; font: 500 24px var(--mono); color: var(--faint);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+  <!-- ══════════ 26 · WHERE NEXT ══════════ -->
+  <section data-label="Where Next" data-screen-label="Where next" style="background-color: var(--bg); background-image: linear-gradient(rgba(122,148,97,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(122,148,97,0.14) 1px, transparent 1px); background-size: 96px 96px; color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; padding: var(--pad-top) var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="font: 500 24px var(--mono); color: var(--green); letter-spacing: 0.1em;">## after the workshop</div>
+    <h1 style="margin: 20px 0 0; font: 800 var(--type-title)/1.12 var(--mono); letter-spacing: -0.01em; color: var(--ink);">Where Next?</h1>
+    <div style="margin-top: 56px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 38px 44px;">
+        <div style="font: 700 29px var(--mono); color: var(--green);">install the thing</div>
+        <p style="margin: 16px 0 0; font: 400 29px/1.5 var(--sans); color: var(--soft);">Put Mint or Ubuntu on an old laptop — or dual-boot. A live USB lets you try before you commit.</p>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 38px 44px;">
+        <div style="font: 700 29px var(--mono); color: var(--green);">read the good docs</div>
+        <p style="margin: 16px 0 0; font: 400 29px/1.5 var(--sans); color: var(--soft);">The Arch Wiki is the best Linux documentation anywhere — useful whatever distro you run.</p>
+      </div>
+      <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 38px 44px;">
+        <div style="font: 700 29px var(--mono); color: var(--green);">ask humans</div>
+        <p style="margin: 16px 0 0; font: 400 29px/1.5 var(--sans); color: var(--soft);">You're at a hacker camp surrounded by Linux people. Ask anyone. That's the whole point of this place.</p>
+      </div>
+    </div>
+    <div style="margin-top: auto; display: flex; justify-content: space-between; font: 500 24px var(--mono); color: var(--faint);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+  <!-- ══════════ 27 · EXIT ══════════ -->
+  <section data-label="Exit" data-screen-label="Thanks" style="background-color: var(--bg); background-image: linear-gradient(rgba(122,148,97,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(122,148,97,0.14) 1px, transparent 1px); background-size: 96px 96px; color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; padding: var(--pad-top) var(--pad-x) 44px; box-sizing: border-box; overflow: hidden;">
+    <div style="display: flex; flex-direction: column; justify-content: center; flex: 1;">
+      <div style="font: 500 34px var(--mono); color: var(--dim);">you@bornhack:~$ <span style="color: var(--ink);">exit</span></div>
+      <h1 style="margin: 44px 0 0; font: 800 110px/1.08 var(--mono); letter-spacing: -0.02em; color: var(--ink);">Thanks — go<br>break something.</h1>
+      <p style="margin: 36px 0 0; font: 400 36px/1.5 var(--sans); color: var(--soft);">(In a folder called junk. You know how to make one now.)</p>
+      <div style="margin-top: 64px; font: 500 28px/1.7 var(--mono); color: var(--dim);">logout<br>Connection to bornhack closed.</div>
+    </div>
+    <div style="display: flex; justify-content: space-between; font: 500 24px var(--mono); color: var(--faint);"><span>$ linux for the curious</span><span>bornhack 2026</span></div>
+  </section>
+
+</x-import>
+</x-dc>
+</body>
+</html>
