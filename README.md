@@ -78,6 +78,8 @@ Required repository secrets: `DOCKERHUB_USERNAME`, `DOCKERHUB_TOKEN`.
 ## Deployment
 
 The deck runs on the ZimaOS box as app `bornhack-linux-deck`, pulling
-`elohite/bornhack-linux-deck:latest` from Docker Hub. After CI publishes a
-new image, refresh the app to the new image (e.g. via the ZimaOS UI or the
-zimaos MCP `update_app_image` tool).
+`elohite/bornhack-linux-deck:latest` from Docker Hub. A label-scoped
+Watchtower on the box (`--label-enable`, 10-minute interval) auto-pulls the
+new image after CI publishes — the deck service carries the
+`com.centurylinklabs.watchtower.enable` label, so pushes to `main` reach
+the box within ~10 minutes with no manual step.
