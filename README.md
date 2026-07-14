@@ -17,6 +17,35 @@ docker run -d -p 8080:80 elohite/bornhack-linux-deck
 The deck is fully self-contained (fonts inlined) and works offline.
 Browser print gives one page per slide.
 
+## Offline fallback (if the hosted site is down)
+
+Download the slides ahead of time while you have internet — the image
+contains everything, so once pulled you need no network at all:
+
+```sh
+docker pull elohite/bornhack-linux-deck
+```
+
+Then serve them locally whenever you need them:
+
+```sh
+docker run -d -p 8080:80 --name linux-deck elohite/bornhack-linux-deck
+# open http://localhost:8080
+```
+
+No Docker on the presentation machine? Extract the single HTML file from
+the image and open it straight in a browser — no web server required:
+
+```sh
+docker create --name deck-tmp elohite/bornhack-linux-deck
+docker cp deck-tmp:/usr/share/nginx/html/index.html linux-deck.html
+docker rm deck-tmp
+# open linux-deck.html in any browser (double-click or drag into a window)
+```
+
+`linux-deck.html` is one ~720 KiB file with fonts and scripts embedded;
+copy it to a USB stick as a belt-and-braces backup for the workshop.
+
 ## Repository layout
 
 ```
